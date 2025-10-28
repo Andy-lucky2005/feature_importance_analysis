@@ -51,7 +51,7 @@ For paper 'Rethinking feature importance for interpretable machine learning in c
 
 ---
 
-## 使用说明
+## Instructions for Use
 
 1. Place the original dataset Science_feature_data.xlsx in the Feature_Value folder.
 2. Run the scripts corresponding to the analysis method or model you want to use.  
