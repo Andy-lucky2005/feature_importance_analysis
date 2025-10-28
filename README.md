@@ -32,13 +32,10 @@ For paper 'Rethinking feature importance for interpretable machine learning in c
 ﻿
   performance – SISSO model performance evaluation
 
-﻿
-  AGM – Average Gradient Magnitude analysis
+﻿  AGM – Average Gradient Magnitude analysis
 
- 
   SGR – Sample Gradient Ranking analysis
 
- 
   SHAP – SHAP-based feature contribution analysis
 
 - **Spearman_all_methods**  
