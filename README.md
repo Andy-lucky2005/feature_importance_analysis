@@ -27,14 +27,18 @@ For paper 'Rethinking feature importance for interpretable machine learning in c
   KernelSHAP and TreeSHAP.
   
 - **SISSO_Formula_analysis**
+  
   Feature analysis based on SISSO-generated formulas:
 ﻿
   performance – SISSO model performance evaluation
+
 ﻿
   AGM – Average Gradient Magnitude analysis
-﻿
+
+ 
   SGR – Sample Gradient Ranking analysis
-﻿
+
+ 
   SHAP – SHAP-based feature contribution analysis
 
 - **Spearman_all_methods**  
