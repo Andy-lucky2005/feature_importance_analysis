@@ -4,7 +4,7 @@ For paper 'Rethinking feature importance for interpretable machine learning in c
 ## Repository Structure
 
 - **Feature_Value**
-  Contains raw and preprocessed feature values from the dataset 
+-  Contains raw and preprocessed feature values from the dataset 
   (Science_feature_data.xlsx), used for all subsequent analyses.
 
 - **Hyperparameter_optimization**  
@@ -26,15 +26,15 @@ For paper 'Rethinking feature importance for interpretable machine learning in c
   KernelSHAP and TreeSHAP.
   
 - **SISSO_Formula_analysis**
-  Feature analysis based on SISSO-generated formulas:
+-  Feature analysis based on SISSO-generated formulas:
 ﻿
-  performance – SISSO model performance evaluation
+-  performance – SISSO model performance evaluation
 ﻿
-  AGM – Average Gradient Magnitude analysis
+-  AGM – Average Gradient Magnitude analysis
 ﻿
-  SGR – Sample Gradient Ranking analysis
+-  SGR – Sample Gradient Ranking analysis
 ﻿
-  SHAP – SHAP-based feature contribution analysis
+-  SHAP – SHAP-based feature contribution analysis
 
 - **Spearman_all_methods**  
   Spearman correlation analysis across all feature importance methods to assess 
