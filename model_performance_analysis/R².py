@@ -3,7 +3,7 @@ import numpy as np
 plt.rcParams['font.family'] = 'Arial'       # 全局字体设置为 Arial
 plt.rcParams['axes.unicode_minus'] = False  # 显示负号
 # 数据
-models = ['RF', 'GBRT', 'XGBoost', 'LR', 'MLP', 'SVR','Formula']
+models = ['RF', 'GBRT', 'XGBoost', 'LR', 'MLP', 'SVR','Formula[28]']
 mae_values = [0.8628023451069552,
               0.894294539235849,
               0.874114668356474,

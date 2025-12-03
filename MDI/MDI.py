@@ -137,9 +137,7 @@ fig = plt.figure(figsize=(10, 7))
 plt.bar(x - width, rf_mean, label="RF", color="#E24B36", width=width)
 plt.bar(x, gbr_mean, label="GBRT", color="#3C5382", width=width)
 plt.bar(x + width, xgb_mean, label="XGBoost", color="#00A088", width=width)
-# plt.bar(x - width, rf_mean, label="RF", color="#EA9493", edgecolor="#D02A2C",width=width)
-# plt.bar(x, gbr_mean, label="GBRT", color="#8FBAD9", edgecolor="#2575AD",width=width)
-# plt.bar(x + width, xgb_mean, label="XGBoost", color="#95CF95",edgecolor="#2F9C2F", width=width)
+
 # 按平均重要性排序并输出
 def print_sorted_importance(mean_importance, model_name):
     sorted_idx = np.argsort(mean_importance)[::-1]  # 从大到小排序索引

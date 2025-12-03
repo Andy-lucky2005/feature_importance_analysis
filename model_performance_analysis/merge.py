@@ -8,7 +8,7 @@ png_paths = [
     "MAE.png",
     "R².png"
 ]
-out_pdf = "model_performance_analysis.pdf"
+out_pdf = "performance.pdf"
 labels = ["A","B","C","D","E","F"]  # 改成字母 A-F
 # ----------------------------
 

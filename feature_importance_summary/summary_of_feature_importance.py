@@ -17,8 +17,8 @@ feature_names = [
 # 2. 不同方法的特征排名 (示例数据)
 # ------------------------
 importance_data = {
-    'pearson correlation': [13, 2, 10, 8, 7, 3, 5, 0, 6, 1, 4, 9, 12, 11],
-    'spearman correlation': [2, 13, 8, 10, 7, 5, 3, 1, 0, 6, 12, 4, 9, 11],
+    'Pearson correlation': [13, 2, 10, 8, 7, 3, 5, 0, 6, 1, 4, 9, 12, 11],
+    'Spearman correlation': [2, 13, 8, 10, 7, 5, 3, 1, 0, 6, 12, 4, 9, 11],
     'MI': [10, 3, 7, 5, 13, 1, 8, 2, 0, 4, 12, 6, 9, 11],
     'RF-TreeSHAP': [3, 10, 5, 2, 8, 0, 1, 4, 12, 7, 13, 6, 9, 11],
     'RF-KernelSHAP': [3, 10, 5, 2, 8, 0, 1, 4, 12, 7, 13, 6, 9, 11],
@@ -40,10 +40,10 @@ importance_data = {
     'MLP-KernelSHAP': [3, 8, 2, 10, 5, 4, 13, 12, 7, 0, 9, 1, 6, 11],
     'MLP-PFI': [3, 5, 8, 2, 10, 12, 13, 4, 0, 9, 1, 7, 6, 11],
     # 在四个公式中13 4 5 12 3排名均设置为最后一位，formula-Feature mean的8 10均设置为排名第7位 formula-Rank average的10,8均设置为第6  formula-Data average的10 8均设置为第8位
-    'formula-MVPD': [13, 4, 5, 12, 3, 7, 8, 10, 2, 6, 9, 0, 1, 11],
-    'formula-SGR': [13,4,5,12,3,7,2,10,8,6,9,0,1,11],
-    'formula-AGM': [13,4,5,12,3,10,8,2,7,6,9,0,1,11],
-    'formula-SHAP': [13,4,5,12,3,8,2,10,0,1,9,7,6,11],
+    'Formula-MVPD': [13, 4, 5, 12, 3, 7, 8, 10, 2, 6, 9, 0, 1, 11],
+    'Formula-SGR': [13,4,5,12,3,7,2,10,8,6,9,0,1,11],
+    'Formula-AGM': [13,4,5,12,3,10,8,2,7,6,9,0,1,11],
+    'Formula-SHAP': [13,4,5,12,3,8,2,10,0,1,9,7,6,11],
 }
 
 methods = list(importance_data.keys())
@@ -55,33 +55,36 @@ n_features = len(feature_names)
 # ------------------------
 importance_matrix = np.full((n_methods, n_features), np.nan)
 
-formula_methods = ['formula-MVPD', 'formula-SGR', 'formula-AGM','formula-SHAP']
+Formula_methods = ['Formula-MVPD', 'Formula-SGR', 'Formula-AGM','Formula-SHAP']
 for i, (method, ranking) in enumerate(importance_data.items()):
-    if method in formula_methods:
+    # print('methods:',method,'ranking:',ranking)
+    if method in Formula_methods:
         for rank, feature_index in enumerate(ranking):
             # 特殊规则：13,4,5,12,3 → 最后一位（n_features-1）
             if feature_index in [13, 4, 5, 12, 3]:
                 importance_matrix[i, feature_index] = 0
-            # Feature mean 特殊：8,10 → 第7位
-            elif method == 'formula-MVPD' and feature_index in [8, 10]:
+            # Feature MVPD 特殊：8,10 → 第7位
+            elif method == 'Formula-MVPD' and feature_index in [8, 10]:
                 importance_matrix[i, feature_index] = 7
             # Rank average 特殊：10,8 → 第6位
-            elif method == 'formula-SGR' and feature_index in [10, 8]:
+            elif method == 'Formula-SGR' and feature_index in [10, 8]:
                 importance_matrix[i, feature_index] = 8
             # Data average 特殊：10,8 → 第8位
-            elif method == 'formula-AGM' and feature_index in [10, 8]:
+            elif method == 'Formula-AGM' and feature_index in [10, 8]:
                 importance_matrix[i, feature_index] = 6
             else:
                 importance_matrix[i, feature_index] = rank
     else:
         for rank, feature_index in enumerate(ranking):
             importance_matrix[i, feature_index] = rank
+            # print('importance_matrix:',importance_matrix)
 
 
 # ------------------------
 # 4. 计算平均排名（越小越重要）并转换为相对排名（0~1）
 # ------------------------
 rel_importance = 1 - (importance_matrix / (n_features - 1))
+print('rel:',rel_importance)
 mean_rel_importance = np.mean(rel_importance, axis=0)
 
 # x轴特征排序：最重要放左边

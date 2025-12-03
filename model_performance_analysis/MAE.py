@@ -3,7 +3,7 @@ import numpy as np
 plt.rcParams['font.family'] = 'Arial'       # 全局字体设置为 Arial
 plt.rcParams['axes.unicode_minus'] = False  # 显示负号
 # 数据
-models = ['RF', 'GBRT', 'XGBoost', 'LR', 'MLP', 'SVR','Formula']
+models = ['RF', 'GBRT', 'XGBoost', 'LR', 'MLP', 'SVR','Formula[28]']
 mae_values = [0.1870353575169314,
               0.15971294204210046,
               0.18230688077998997,
@@ -19,6 +19,7 @@ sorted_mae_values = [mae_values[i] for i in sorted_indices]
 
 # 自定义颜色（按你给的顺序）
 custom_colors = ['#EA9393', '#FFBF86', '#FFDB99', '#95CF95', '#8FBBD9', '#C9B3DE','#E599E5']
+# custom_colors = ['#FC0303', '#FCB703', '#FCF503', '#07B42D', '#06C9EF', '#033EEE','#E003EE']
 border_colors = ['#D83031', '#FF8D28', '#FFAE1C', '#39A639', '#257AB6', '#9B72C2', '#C109C1']
 # 画图
 fig, ax = plt.subplots(figsize=(9, 8))
