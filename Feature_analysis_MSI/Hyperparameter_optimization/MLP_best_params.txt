@@ -1,0 +1,9 @@
+Best hyperparameters:
+n_layers: 2
+n_units_l0: 40
+n_units_l1: 8
+activation: relu
+solver: lbfgs
+alpha: 0.009885444029062893
+
+Best negative MSE: -0.04183855781922668

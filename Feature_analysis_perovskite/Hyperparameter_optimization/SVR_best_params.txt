@@ -1,0 +1,7 @@
+Best hyperparameters:
+kernel: rbf
+C: 994.5831179044228
+epsilon: 0.02232386821844736
+gamma: 0.0022362708493146688
+
+Best negative MSE: -0.022726189829821206

@@ -1,0 +1,6 @@
+Best hyperparameters:
+kernel: linear
+C: 582.1033339684861
+epsilon: 0.19634276708263904
+
+Best negative MSE: -622165.4469113102

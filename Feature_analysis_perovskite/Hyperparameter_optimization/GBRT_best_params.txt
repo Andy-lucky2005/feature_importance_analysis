@@ -1,0 +1,7 @@
+max_depth: 5
+learning_rate: 0.09963790716286929
+n_estimators: 250
+subsample: 0.5742969533069769
+min_samples_split: 6
+min_samples_leaf: 2
+Best Score: -0.02912464858359694

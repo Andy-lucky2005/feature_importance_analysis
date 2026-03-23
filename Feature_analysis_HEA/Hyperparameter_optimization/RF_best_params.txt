@@ -1,0 +1,6 @@
+n_estimators: 31
+max_depth: 10
+max_features: 14
+min_samples_split: 5
+min_samples_leaf: 1
+Best Score: [-216605.74746535346]

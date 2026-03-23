@@ -1,0 +1,8 @@
+Best hyperparameters:
+n_layers: 1
+n_units_l0: 19
+activation: tanh
+solver: lbfgs
+alpha: 0.0072482609923130645
+
+Best negative MSE: -0.010891793634066647
