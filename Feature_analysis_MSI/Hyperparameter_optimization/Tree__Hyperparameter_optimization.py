@@ -23,8 +23,8 @@ X = data.iloc[:, 2:16]  # 从第三列到第16列（包含第16列）
 def optuna_objective_rf(trial):
     # 选择超参数搜索空间
     n_estimators = trial.suggest_int('n_estimators', 10, 300, step= 1)  # 树的数量，取值范围从10到30
-    # max_depth = trial.suggest_int('max_depth', 3, 10, step= 1)  # 树的最大深度，取值范围从10到30
-    max_depth = trial.suggest_int('max_depth', 1, 1, step=1)  # 树的最大深度，取值范围从10到30
+    max_depth = trial.suggest_int('max_depth', 3, 10, step= 1)  # 树的最大深度，取值范围从10到30
+    # max_depth = trial.suggest_int('max_depth', 1, 1, step=1)  # 树的最大深度，取值范围从10到30
     max_features = trial.suggest_int('max_features', 1, 14, step= 1)  # 每棵树使用的最大特征数，取值范围从10到30
     min_samples_split = trial.suggest_int('min_samples_split', 2, 10)
     min_samples_leaf = trial.suggest_int('min_samples_leaf', 1, 5)
@@ -73,8 +73,8 @@ with open('RF_best_params.txt', 'w') as f:
 
 '''贝叶斯梯度提升树寻优'''
 def optuna_objective_gbr(trial):
-    # max_depth = trial.suggest_int('max_depth', 3, 10)
-    max_depth = trial.suggest_int('max_depth', 1, 1)
+    max_depth = trial.suggest_int('max_depth', 3, 10)
+    # max_depth = trial.suggest_int('max_depth', 1, 1)
     learning_rate = trial.suggest_float('learning_rate', 0.001, 0.1, log=True)
     n_estimators = trial.suggest_int('n_estimators', 10, 300)
     subsample = trial.suggest_float('subsample', 0.5, 1.0)
