@@ -238,3 +238,32 @@ ga_df = pd.DataFrame({
 ga_df.to_excel("GA_ranking_Spearman.xlsx", index=False)
 
 print("GA排序已保存到 GA_ranking_Spearman.xlsx")
+
+from scipy.stats import rankdata
+# -------- 提取 X 和 y --------
+X = df_selected.drop(columns=["bandgap"]).values
+y = df_selected["bandgap"].values
+feature_names = list(df_selected.drop(columns=["bandgap"]).columns)
+# 对每一列特征做秩转换
+X_ranked = np.apply_along_axis(rankdata, 0, X)
+y_ranked = rankdata(y)
+
+# 计算 Spearman 绝对相关性
+pearson_scores = np.abs(np.corrcoef(X_ranked.T, y_ranked, rowvar=True)[-1, :-1])
+
+# -------- 升序排序（最不重要 → 最重要） --------
+sorted_idx_asc = np.argsort(pearson_scores)
+ranking_array = sorted_idx_asc.tolist()
+print("\nSpearman 特征重要性排序数组（最不重要 → 最重要）:")
+print(ranking_array)
+
+# -------- GA 排序（1 最重要） --------
+rank_array = np.empty(len(pearson_scores), dtype=int)
+rank_array[np.argsort(pearson_scores)[::-1]] = np.arange(1, len(pearson_scores)+1)
+print("\nSpearman GA排序（1 最重要）:")
+print(rank_array.tolist())
+
+# -------- 对照特征名称 --------
+feature_ordered = [feature_names[i] for i in sorted_idx_asc]
+print("\n对应特征名称（最不重要 → 最重要）:")
+print(feature_ordered)

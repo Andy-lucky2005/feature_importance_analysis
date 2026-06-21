@@ -175,3 +175,19 @@ plt.savefig("LR_KernelSHAP_custom_order.png", dpi=300, bbox_inches="tight")
 plt.close()
 
 print("LR 特征重要性柱图已按指定顺序绘制完成！")
+# -------- Feature_importance_heatmap --------
+print("Feature_importance_heatmap:")
+
+sorted_idx_asc = np.argsort(avg_feature_importance)
+ranking_array = sorted_idx_asc.tolist()
+
+print("\nLR-SHAP特征重要性排序数组（最不重要 → 最重要）:")
+print(ranking_array)
+
+# -------- GA排序 --------
+print("GA排序：")
+
+rank_array = np.empty(len(avg_feature_importance), dtype=int)
+rank_array[np.argsort(avg_feature_importance)[::-1]] = np.arange(1, len(avg_feature_importance) + 1)
+
+print(rank_array.tolist())

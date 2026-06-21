@@ -196,3 +196,35 @@ plt.savefig("XGBoost_TreeSHAP_custom_order.png", dpi=300, bbox_inches="tight")
 plt.close()
 
 print("XGBoost 特征重要性柱图已按指定顺序绘制完成！")
+
+# ---------------- SHAP排序输出 ----------------
+
+sorted_idx = np.argsort(avg_feature_importance)[::-1]
+
+print("\nSHAP 平均特征重要性（降序）:")
+for idx in sorted_idx:
+    print(f"{feature_names[idx]}: {avg_feature_importance[idx]:.6f}")
+
+# -------- Feature_importance_heatmap --------
+print("Feature_importance_heatmap:")
+
+sorted_idx_asc = np.argsort(avg_feature_importance)
+ranking_array = sorted_idx_asc.tolist()
+
+print("\nSHAP特征重要性排序数组（最不重要 → 最重要）:")
+print(ranking_array)
+
+# -------- GA排序 --------
+print("GA排序：")
+rank_array = np.empty(len(avg_feature_importance), dtype=int)
+rank_array[np.argsort(avg_feature_importance)[::-1]] = np.arange(1, len(avg_feature_importance) + 1)
+
+print(rank_array.tolist())
+
+# ga_df = pd.DataFrame({
+#     "GA_rank": rank_array
+# })
+#
+# ga_df.to_excel("GA_ranking_XGBoost_TreeSHAP.xlsx", index=False)
+#
+# print("GA排序已保存到 GA_ranking.xlsx")

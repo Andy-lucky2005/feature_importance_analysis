@@ -81,19 +81,28 @@ fig.subplots_adjust(left=0, right=1, top=1, bottom=0)
 plt.savefig("pearson.png", dpi=300, bbox_inches="tight")
 # plt.show()
 
-# ---------------- Pearson排序输出 ----------------
 
-# 去掉目标变量自身
-corr_feature = corr_with_target.drop(target_col)
+# -------- 提取 X 和 y --------
+X = df_selected.drop(columns=["Eadh_Experimental_Data (J/m2)"]).values
+y = df_selected["Eadh_Experimental_Data (J/m2)"].values
+feature_names = list(df_selected.drop(columns=["Eadh_Experimental_Data (J/m2)"]).columns)
 
-# 对应的特征列表（不包含 STY）
-feature_list = corr_feature.index.tolist()
-corr_scores = corr_feature.values
+# -------- 计算 Pearson 绝对相关性 --------
+pearson_scores = np.abs(np.corrcoef(X.T, y, rowvar=True)[-1, :-1])
 
-# -------- 降序输出 --------
-sorted_idx = np.argsort(corr_scores)[::-1]
+# -------- 升序排序（最不重要 → 最重要） --------
+sorted_idx_asc = np.argsort(pearson_scores)
+ranking_array = sorted_idx_asc.tolist()
+print("\nPearson特征重要性排序数组（最不重要 → 最重要）:")
+print(ranking_array)
 
-print("\nPearson 平均特征重要性（降序）:")
-for idx in sorted_idx:
-    print(f"{feature_list[idx]}: {corr_scores[idx]:.6f}")
+# -------- GA 排序（1 最重要） --------
+rank_array = np.empty(len(pearson_scores), dtype=int)
+rank_array[np.argsort(pearson_scores)[::-1]] = np.arange(1, len(pearson_scores)+1)
+print("\nPearson GA排序（1 最重要）:")
+print(rank_array.tolist())
 
+# -------- 对照特征名称 --------
+feature_ordered = [feature_names[i] for i in sorted_idx_asc]
+print("\n对应特征名称（最不重要 → 最重要）:")
+print(feature_ordered)

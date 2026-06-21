@@ -241,3 +241,27 @@ ga_df = pd.DataFrame({
 ga_df.to_excel("GA_ranking_Pearson.xlsx", index=False)
 
 print("GA排序已保存到 GA_ranking_Pearson.xlsx")
+
+X = df_selected.drop(columns=["bandgap"]).values
+y = df_selected["bandgap"].values
+feature_names = list(df_selected.drop(columns=["bandgap"]).columns)
+
+# -------- 计算 Pearson 绝对相关性 --------
+pearson_scores = np.abs(np.corrcoef(X.T, y, rowvar=True)[-1, :-1])
+
+# -------- 升序排序（最不重要 → 最重要） --------
+sorted_idx_asc = np.argsort(pearson_scores)
+ranking_array = sorted_idx_asc.tolist()
+print("\nPearson特征重要性排序数组（最不重要 → 最重要）:")
+print(ranking_array)
+
+# -------- GA 排序（1 最重要） --------
+rank_array = np.empty(len(pearson_scores), dtype=int)
+rank_array[np.argsort(pearson_scores)[::-1]] = np.arange(1, len(pearson_scores)+1)
+print("\nPearson GA排序（1 最重要）:")
+print(rank_array.tolist())
+
+# -------- 对照特征名称 --------
+feature_ordered = [feature_names[i] for i in sorted_idx_asc]
+print("\n对应特征名称（最不重要 → 最重要）:")
+print(feature_ordered)

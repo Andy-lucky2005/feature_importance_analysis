@@ -170,3 +170,4 @@ rank_array = np.empty(len(avg_importance), dtype=int)
 rank_array[np.argsort(avg_importance)[::-1]] = np.arange(1, len(avg_importance) + 1)
 
 print(rank_array.tolist())
+

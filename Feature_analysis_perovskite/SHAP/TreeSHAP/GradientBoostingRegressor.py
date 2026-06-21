@@ -304,7 +304,7 @@ x_max = np.max(avg_importance_ordered)
 x_ticks = np.linspace(0, x_max, 4)
 plt.xticks(x_ticks, [f'{x:.2f}' for x in x_ticks], fontsize=45,)
 
-plt.xlabel("Average SHAP Importance", fontsize=45,)
+plt.xlabel("Average SHAP Importance", fontsize=45)
 
 #边框加粗
 for spine in ax.spines.values():

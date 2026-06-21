@@ -163,3 +163,9 @@ ga_df = pd.DataFrame({
 ga_df.to_excel("GA_ranking.xlsx", index=False)
 
 print("GA排序已保存到 GA_ranking.xlsx")
+
+print("Feature_importance_heatmap:")
+sorted_idx_asc = np.argsort(lr_mean_importance)   # 升序
+ranking_array = sorted_idx_asc.tolist()
+print("\n线性回归特征重要性排序数组（最不重要 → 最重要）:")
+print(ranking_array)

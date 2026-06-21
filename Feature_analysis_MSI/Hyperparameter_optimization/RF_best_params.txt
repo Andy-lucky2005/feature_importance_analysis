@@ -1,6 +1,6 @@
-n_estimators: 66
-max_depth: 9
-max_features: 7
-min_samples_split: 2
-min_samples_leaf: 1
-Best Score: [-0.06965898775174349]
+n_estimators: 11
+max_depth: 1
+max_features: 6
+min_samples_split: 6
+min_samples_leaf: 2
+Best Score: [-0.28071368078643755]

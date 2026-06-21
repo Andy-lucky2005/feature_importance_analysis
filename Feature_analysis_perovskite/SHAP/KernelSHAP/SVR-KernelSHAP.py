@@ -154,7 +154,7 @@ for fold, (train_index, val_index) in enumerate(kf.split(X), 1):
     # KernelSHAP 解释器
     explainer = shap.KernelExplainer(model.predict, X_train_scaled)
 
-    shap_values = explainer.shap_values(X_val_scaled)
+    shap_values = explainer.shap_values(X_val_scaled, nsamples=100,n_jobs=-1)
     all_shap_values.append(shap_values)
 
     # 计算特征重要性（取绝对值的平均值）

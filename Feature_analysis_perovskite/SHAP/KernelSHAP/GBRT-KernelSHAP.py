@@ -136,7 +136,7 @@ for train_index, val_index in kf.split(X):
 
     # 计算验证集 SHAP 值（注意 KernelSHAP 计算量非常大，这里只取部分验证集样本）
     # shap_values = explainer.shap_values(X_val, nsamples=100)  # nsamples 可调，越大越准但越慢
-    shap_values = explainer.shap_values(X_val)  # nsamples 可调，越大越准但越慢
+    shap_values = explainer.shap_values(X_val,nsample = 100, n_jobs=-1)  # nsamples 可调，越大越准但越慢
 
     importance = np.abs(shap_values).mean(axis=0)
     all_importances.append(importance)

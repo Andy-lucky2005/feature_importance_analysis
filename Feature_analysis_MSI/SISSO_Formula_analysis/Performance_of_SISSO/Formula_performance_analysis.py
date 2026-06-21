@@ -34,7 +34,7 @@ constant = 16 * 0.0160217  # 常数16
 
 # 计算Eadh（单位 mev/A²）
 Eadh_calculated = ((a1 * γ_M * Xp_M_prime * (Hf_MO - Hsub_M)) / Xp_M) + ((a2 * IE_M * (Hf_M_prime_M - Hsub_M - Hsub_M_prime)) / Hf_M_prime_O) * 16.0217 + constant
-data['Eadh_calculated'] = abs(Eadh_calculated)
+data['Eadh_calculated'] = Eadh_calculated
 
 # 计算 MAE 和 R²
 # 目标值 Eadh

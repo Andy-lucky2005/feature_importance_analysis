@@ -25,11 +25,11 @@ importance_data = {
     'RF-MDI': [3, 10, 5, 13, 2, 1, 8, 0, 4, 6, 7, 12, 9, 11],
     'RF-PFI': [3, 5, 10, 8, 2, 4, 1, 12, 0, 13, 7, 6, 9, 11],
     'GBRT-TreeSHAP': [4, 3, 12, 10, 2, 5, 8, 0, 1, 13, 7, 6, 9, 11],
-    'GBRT-KernelSHAP': [4, 3, 12, 10, 2, 5, 8, 0, 1, 13, 7, 6, 9, 11],
+    'GBRT-KernelSHAP': [4, 3, 10, 2, 12, 5, 8, 0, 1, 13, 7, 6, 9, 11],
     'GBRT-MDI': [3, 4, 10, 12, 5, 13, 8, 2, 0, 1, 6, 7, 9, 11],
     'GBRT-PFI': [4,8,3,10,5,12,2,1,0,13,7,6,9,11],
     'XGBoost-TreeSHAP': [12, 3, 2, 10, 5, 8, 4, 0, 1, 7, 13, 6, 9, 11],
-    'XGBoost-KernelSHAP': [4, 3, 10, 2, 12, 5, 8, 0, 1, 13, 7, 6, 9, 11],
+    'XGBoost-KernelSHAP': [12, 3, 2, 10, 5, 8, 4, 0, 1, 7, 13, 6, 9, 11],
     'XGBoost-MDI': [12, 13, 5, 3, 8, 2, 6, 1, 10, 7, 4, 0, 11, 9],
     'XGBoost-PFI': [3,12,10,5,2,8,4,1,13,7,0,6,9,11],
     'LR-KernelSHAP': [0, 3, 1, 13, 9, 2, 8, 10, 4, 5, 7, 6, 12, 11],
@@ -103,16 +103,40 @@ print(df_sorted.round(2))
 # ------------------------
 # 6. 自定义颜色 (蓝色最重要 -> 红色最不重要)
 # ------------------------
+from matplotlib.colors import LinearSegmentedColormap, ListedColormap
+
+# 原始颜色（你给的）
 custom_colors = [
     "#1C5AA6", "#198CB9", "#35B79C", "#82B850", "#A3CA67", "#DBE466",
     "#FAE93B", "#FEEF90", "#FDD047", "#F8BB4B", "#F79356", "#F47D5A",
     "#F1695F", "#EA2C42"
 ]
-# 按平均相对重要性排序颜色
-sorted_colors = [custom_colors[i] for i in np.linspace(0, len(custom_colors)-1, n_features, dtype=int)]
-cmap_disc = ListedColormap(sorted_colors)
+
+# 1️构造连续 colormap
+base_cmap = LinearSegmentedColormap.from_list(
+    "custom_smooth",
+    custom_colors
+)
+
+# 2️根据特征数量自动生成颜色
+colors = base_cmap(np.linspace(0, 1, n_features))
+
+# 3️转为离散 colormap
+cmap_disc = ListedColormap(colors)
+
+# 4️分段控制（关键）
 bounds = np.arange(-0.5, n_features + 0.5, 1)
 norm = BoundaryNorm(bounds, cmap_disc.N)
+# custom_colors = [
+#     "#1C5AA6", "#198CB9", "#35B79C", "#82B850", "#A3CA67", "#DBE466",
+#     "#FAE93B", "#FEEF90", "#FDD047", "#F8BB4B", "#F79356", "#F47D5A",
+#     "#F1695F", "#EA2C42"
+# ]
+# # 按平均相对重要性排序颜色
+# sorted_colors = [custom_colors[i] for i in np.linspace(0, len(custom_colors)-1, n_features, dtype=int)]
+# cmap_disc = ListedColormap(sorted_colors)
+# bounds = np.arange(-0.5, n_features + 0.5, 1)
+# norm = BoundaryNorm(bounds, cmap_disc.N)
 
 # ------------------------
 # 7. 绘图
